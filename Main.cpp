@@ -8,30 +8,64 @@
 #include "MenuAdministrador.h"
 #include "MenuCliente.h"
 #include "Pila.h"
-void ingresar()
+#include "Registrar.h"
+int ingresar()
 {
-
+	int op;
+	cout << "[1] Cliente" << endl;
+	cout << "[2] Administrador" << endl;
+	cout << "[3] Salir" << endl;
+	cout << "Ingrese opci" << char(162) << "n: "; cin >> op;
+	return op;
+}
+void menu(int tipoMenu)
+{
+	switch (tipoMenu)
+	{
+	case 1:
+	{
+		MenuCliente<int, char, string>* menuClient = new MenuCliente<int, char, string>();
+		while (true) {
+			int opcion;
+			do {
+				opcion = menuClient->mostrarMenu();
+			} while (opcion < 1 || opcion > 8);
+			if (opcion >= 1 && opcion <= 7) {
+				menuClient->procesarOpciones(opcion);
+			}
+			else break;
+		}
+		break;
+	}
+	case 2:
+	{
+		MenuAdministrador<int, char>* menuAdmin = new MenuAdministrador<int, char>();
+		while (true) {
+			int opcion;
+			do {
+				opcion = menuAdmin->mostrarMenu();
+			} while (opcion < 1 || opcion > 16);
+			if (opcion >= 1 && opcion <= 15) {
+				menuAdmin->procesarOpciones(opcion);
+			}
+			else break;
+		}
+		break;
+	}
+	case 3: exit(0);
+	}
 }
 int main()
 {
-	Lista<Cliente<string>*>* listaCliente = new Lista<Cliente<string>*>();
-	for (int i = 0; i < 3; i++)
-	{
-		string nom, ape, usu, dni, cor, con;
-		cout << "CLIENTE " << i + 1 << ":" << endl;
-		cout << "Nombre: "; cin >> nom;
-		cout << "Apellido: "; cin >> ape;
-		cout << "Usuario: "; cin >> usu;
-		cout << "Dni: "; cin >> dni;
-		cout << "Correo: "; cin >> cor;
-		cout << "Contrase" << char(164) << "a: "; cin >> con;
-		Cliente<string>* client = new Cliente<string>(nom, ape, usu, dni, cor, con);
-		listaCliente->agregaPos(client, i);
-	}
-	for (int i = 0; i < listaCliente->longitud(); i++)
-	{
-		cout << "CLIENTE " << i + 1 << ":" << endl;
-		listaCliente->obtenerPos(i)->mostrarDatos();
+	Registrar* registrar = new Registrar();
+	registrar->registrarDatos();
+	while (true) {
+		int client_Admin;
+		do {
+			borrar();
+			client_Admin = ingresar();
+		} while (client_Admin < 1 || client_Admin > 3);
+		menu(client_Admin);
 	}
 	getch();
 	return 0;
