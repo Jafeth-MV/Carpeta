@@ -2,7 +2,7 @@
 #include "Dependencias.h"
 
 //Generalizacion
-template <class S>
+template <class C, class S>
 class Cliente
 {
 private:
@@ -11,7 +11,7 @@ private:
 	S usuario;
 	S dni;
 	S correo;
-	S contrase�a;
+	S contraseña;
 public:
 	Cliente()
 	{
@@ -20,16 +20,16 @@ public:
 		this->usuario = "";
 		this->dni = "";
 		this->correo = "";
-		this->contrase�a = "";
+		this->contraseña = "";
 	}
-	Cliente(S pNombre, S pApellido, S pUsuario, S pDni, S pCorreo, S pContrase�a)
+	Cliente(S pNombre, S pApellido, S pUsuario, S pDni, S pCorreo, S pContraseña)
 	{
 		this->nombre = pNombre;
 		this->apellido = pApellido;
 		this->usuario = pUsuario;
 		this->dni = pDni;
 		this->correo = pCorreo;
-		this->contrase�a = pContrase�a;
+		this->contraseña = pContraseña;
 	}
 	~Cliente(){}
 	
@@ -48,19 +48,18 @@ public:
 	void setCorreo(S pCorreo) { this->correo = pCorreo; }
 	S getCorreo() { return this->correo; }
 
-	void setContrase�a(S pContrase�a) { this->contrase�a = pContrase�a; }
-	S getContrase�a() { return this->contrase�a; }
+	void setContraseña(S pContraseña) { this->contraseña = pContraseña; }
+	S getContraseña() { return this->contraseña; }
 
 	void ingresarDatos()
 	{
 		S nom, ape, usu, dni, cor, con;
-		cout << "Nombre: "; cin >> nom;
-		cout << "Apellido: "; cin >> ape;
-		cout << "Usuario: "; cin >> usu;
-		cout << "Dni: "; cin >> dni;
-		cout << "Correo: "; cin >> cor;
-		cout << "Contrase" << char(164) << "a: "; cin >> con;
-		Cliente* client = new Cliente(nom, ape, usu, dni, cor, con);
+		cout << "Nombre: "; cin >> nom; setNombre(nom);
+		cout << "Apellido: "; cin >> ape; setApellido(ape);
+		cout << "Usuario: "; cin >> usu; setUsuario(usu);
+		cout << "Dni: "; cin >> dni; setDni(dni);
+		cout << "Correo: "; cin >> cor; setCorreo(cor);
+		cout << "Contrase" << C(164) << "a: "; cin >> con; setContraseña(con);
 	}
 
 	void mostrarDatos()
@@ -70,6 +69,6 @@ public:
 		cout << "Usuario: " << this->usuario << endl;
 		cout << "Dni: " << this->dni << endl;
 		cout << "Correo: " << this->correo << endl;
-		cout << "Contrase" << char(164) << "a: " << this->contrase�a << endl;
+		cout << "Contrase" << char(164) << "a: " << this->contraseña << endl;
 	}
 };
